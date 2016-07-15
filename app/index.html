@@ -1,19 +1,38 @@
 <!doctype html>
-<html lang="en" ng-app="experimentApp">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Recreating features with AngularJS</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="app.css" />
+    
+    <!-- Angular components -->
     <script src="bower_components/angular/angular.js"></script>
-    <script src="app.module.js"></script>
-    <script src="water-stats-table/water-stats-table.module.js"></script>
-    <script src="water-stats-table/water-stats-table.component.js"></script>
+
+    <!-- My modules -->
+    <script src="myApp.module.js"></script>
+
+    <!-- My controllers -->
+    <script src="myApp.controller.js"></script>
+
+    <!-- My services -->
+    <script src="myApp.dataservice.js"></script>
   </head>
+  
   <body>
-
-    <!-- Use a custom component to render a list of phones -->
-    <water-stats-table></water-stats-table>
-
+    <div ng-app="myApp">
+      <div ng-controller="AppController as ctrl">
+        <table>
+          <h2>{{ctrl.title}}</h2>
+          <tr>
+            <th>Daily pollution forecast</th>
+            <td>
+              <span>{{ctrl.dailyForecast}}</span>
+              <span>{{ ctrl.dailyForecastDate | date: 'medium'}}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
