@@ -8,31 +8,21 @@
     
     <!-- Angular components -->
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
 
     <!-- My modules -->
     <script src="myApp.module.js"></script>
-
-    <!-- My controllers -->
-    <script src="myApp.controller.js"></script>
+    <script src="water-quality-table/water-quality-table.module.js"></script>
+    <script src="water-quality-table/water-quality-table.component.js"></script>
 
     <!-- My services -->
-    <script src="myApp.dataservice.js"></script>
+    <script src="/water-quality-table/water-quality-table.dataservice.js"></script>
   </head>
   
   <body>
     <div ng-app="myApp">
-      <div ng-controller="AppController as ctrl">
-        <table>
-          <h2>{{ctrl.title}}</h2>
-          <tr>
-            <th>Daily pollution forecast</th>
-            <td>
-              <span>{{ctrl.dailyForecast}}</span>
-              <span>{{ ctrl.dailyForecastDate | date: 'medium'}}</span>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <water-quality-table></water-quality-table>
     </div>
   </body>
 </html>
