@@ -4,5 +4,5 @@
 angular
 	.module('myApp', [
 		//...which depends on the modules:
-		'waterQualityTable',
+		'waterQualityTable'
 	])

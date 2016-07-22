@@ -86,7 +86,6 @@ angular
 				function getCompliances(){
 					return dataservice.getCompliances().then(function(data){
 						vm.compliances = data;
-						vm.compliances[0].classification = "Poor";
 						return vm.compliances;
 					},function onFailure(message){
 						$log.error("Failed at 'WaterQualityTable.getCompliances()'");

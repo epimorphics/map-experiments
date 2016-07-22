@@ -44,27 +44,19 @@ angular
 		return service;
 
 		function getRiskForecastApi(waterId){
-			var deferred = $q.defer();
-    		deferred.resolve(RISK_FORECAST_API_CALL + waterId + "/latest");
-    		return deferred.promise;
+    		return RISK_FORECAST_API_CALL + waterId + "/latest";
 		}
 
 		function getBWProfileApi(waterId){
-			var deferred = $q.defer();
-			deferred.resolve(BW_PROFILE_API_CALL + waterId + ":latest");
-			return deferred.promise;
+			return BW_PROFILE_API_CALL + waterId + ":latest";
 		}
 
 		function getBWInSeasonApi(waterId){
-			var deferred = $q.defer();
-			deferred.resolve(BW_IN_SEASON_API_CALL + waterId + "/latest");
-			return deferred.promise;
+			return BW_IN_SEASON_API_CALL + waterId + "/latest";
 		}
 
 		function getBWComplianceApi(waterId){
-			var deferred = $q.defer();
-			deferred.resolve(BW_COMPLIANCE_API_CALL + waterId + "?_page=0&_sort=-sampleYear");
-			return deferred.promise;	
+			return BW_COMPLIANCE_API_CALL + waterId + "?_page=0&_sort=-sampleYear";	
 		}
 	}])
 
@@ -78,9 +70,7 @@ angular
 	    	return service;
 
 	    	function getWaterId(){
-	    		var deferred = $q.defer();
-	    		deferred.resolve("2305-35200");
-	    		return deferred.promise;
+	    		return "2305-35200";
 	    	}
 	    }
 	])
@@ -108,102 +98,98 @@ angular
 			return service;
 			
 			function getDailyForecast(){
-				return idservice.getWaterId().then(function(id){
-					return apiservice.getRiskForecastApi(id).then(function(API_CALL){
-						return $http.get(API_CALL)
-					    .then(function onSuccess(response){
-							return response.data.result.items[0].comment._value;
-						}, function onFailure(response){
-							$log.error("Failed http request at 'dataservice.getDailyForecast()':" + response);
-							return "Failed http request at 'dataservice.getDailyForecast()'";
-						});
-					});
+				var waterId  = idservice.getWaterId();
+				var API_CALL = apiservice.getRiskForecastApi(waterId);
+
+				return $http.get(API_CALL)
+			    .then(function onSuccess(response){
+					return response.data.result.items[0].comment._value;
+				}, function onFailure(response){
+					$log.error("Failed http request at 'dataservice.getDailyForecast()':" + response);
+					return "Failed http request at 'dataservice.getDailyForecast()'";
 				});
 			}
 			
 			function getDailyForecastDate(){
-				return idservice.getWaterId().then(function(id){
-					return apiservice.getRiskForecastApi(id).then(function(API_CALL){
-						return $http.get(API_CALL)
-						.then(function onSuccess(response){
-							return response.data.result.items[0].predictedAt._value;
-						}, function onFailure(response){
-							$log.error("Failed http request at 'dataservice.getDailyForecast()':" + response);
-							return "Failed http request at 'dataservice.getDailyForecastDate()'";
-						});
-					});
+				var waterId  = idservice.getWaterId();
+				var API_CALL = apiservice.getRiskForecastApi(waterId);
+
+				return $http.get(API_CALL)
+				.then(function onSuccess(response){
+					return response.data.result.items[0].predictedAt._value;
+				}, function onFailure(response){
+					$log.error("Failed http request at 'dataservice.getDailyForecast()':" + response);
+					return "Failed http request at 'dataservice.getDailyForecastDate()'";
 				});
 			}
 
 			function getIntervalStartDate(){
-				return idservice.getWaterId().then(function(id){
-					return apiservice.getBWProfileApi(id).then(function(API_CALL){
-						return $http.get(API_CALL)
-						.then(function onSuccess(response){
-							return response.data.result.primaryTopic.seasonInterval.beginning.inXSDDateTime._value;
-						}, function onFailure(response){
-							$log.error("Failed http request at 'dataservice.getIntervalStartDate()':" + response);
-							return "Failed http request at 'dataservice.getIntervalStartDate()'";
-						});
-					});
+				var waterId  = idservice.getWaterId(); 
+				var API_CALL = apiservice.getBWProfileApi(waterId);
+
+				return $http.get(API_CALL)
+				.then(function onSuccess(response){
+					return response.data.result.primaryTopic.seasonInterval.beginning.inXSDDateTime._value;
+				}, function onFailure(response){
+					$log.error("Failed http request at 'dataservice.getIntervalStartDate()':" + response);
+					return "Failed http request at 'dataservice.getIntervalStartDate()'";
 				});
+
 			}
 
 			function getIntervalEndDate(){
-				return idservice.getWaterId().then(function(id){
-					return apiservice.getBWProfileApi(id).then(function(API_CALL){
-						return $http.get(API_CALL)
-						.then(function onSuccess(response){
-							return response.data.result.primaryTopic.seasonInterval.end.inXSDDateTime._value;;
-						}, function onFailure(response){
-							$log.error("Failed http request at 'dataservice.getIntervalEndDate()':" + response);
-							return "Failed http request at 'dataservice.getIntervalEndDate()'";
-						});
-					});
+				var waterId  = idservice.getWaterId(); 
+				var API_CALL = apiservice.getBWProfileApi(waterId);
+
+				return $http.get(API_CALL)
+				.then(function onSuccess(response){
+					return response.data.result.primaryTopic.seasonInterval.end.inXSDDateTime._value;;
+				}, function onFailure(response){
+					$log.error("Failed http request at 'dataservice.getIntervalEndDate()':" + response);
+					return "Failed http request at 'dataservice.getIntervalEndDate()'";
 				});
 			}
 
 			function getMostRecentSample(){
-				return idservice.getWaterId().then(function(id){
-					return apiservice.getBWInSeasonApi(id).then(function(API_CALL){
-						return $http.get(API_CALL)
-						.then(function onSuccess(response){
-							var date = response.data.result.items[0].sampleDateTime.inXSDDateTime._value;
-							return timeservice.getCorrectDateFormat(date);
-						}, function onFailure(response){
-							$log.error("Failed http request at 'dataservice.getMostRecentSample()':" + response);
-							return "Failed http request at 'dataservice.getMostRecentSample()'";
-						});
-					});
+				var waterId  = idservice.getWaterId();
+				var API_CALL = apiservice.getBWInSeasonApi(waterId);
+				
+				return $http.get(API_CALL)
+				.then(function onSuccess(response){
+					var date = response.data.result.items[0].sampleDateTime.inXSDDateTime._value;
+					return timeservice.getCorrectDateFormat(date);
+				}, function onFailure(response){
+					$log.error("Failed http request at 'dataservice.getMostRecentSample()':" + response);
+					return "Failed http request at 'dataservice.getMostRecentSample()'";
 				});
+		
 			}
 
 			function getCompliances(){
-				return idservice.getWaterId().then(function(id){
-					return apiservice.getBWComplianceApi(id).then(function(API_CALL){
-						return $http.get(API_CALL)
-						.then(function onSuccess(response){
-							var entries           = response.data.result.items;
-							var compliances       = [];
-							
-							//only get the last 4 classification years
-							for(var i = 0; i < 4; i++){
-								//break if less than 4 classification years
-								if (typeof entries[i] === "undefined"){
-									break;
-								}
-								
-								compliances.push(
-									{
-										year:           entries[i].sampleYear.ordinalYear,
-										classification: entries[i].complianceClassification.name._value 
-									}
-								);
+				var waterId  = idservice.getWaterId();
+				var API_CALL = apiservice.getBWComplianceApi(waterId); 
+
+				return $http.get(API_CALL)
+				.then(function onSuccess(response){
+					var entries           = response.data.result.items;
+					var compliances       = [];
+					
+					//only get the last 4 classification years
+					for(var i = 0; i < 4; i++){
+						//break if less than 4 classification years
+						if (typeof entries[i] === "undefined"){
+							break;
+						}
+						
+						compliances.push(
+							{
+								year:           entries[i].sampleYear.ordinalYear,
+								classification: entries[i].complianceClassification.name._value 
 							}
-							
-							return compliances;
-						})
-					})
+						);
+					}
+					
+					return compliances;
 				})
 			}
 		}
