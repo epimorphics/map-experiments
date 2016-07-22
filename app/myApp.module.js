@@ -4,5 +4,10 @@
 angular
 	.module('myApp', [
 		//...which depends on the modules:
-		'waterQualityTable'
+		'waterQualityTable',
+		'angularMoment'
 	])
+	
+	.run(function(amMoment) {
+    	amMoment.changeLocale('de');
+	});

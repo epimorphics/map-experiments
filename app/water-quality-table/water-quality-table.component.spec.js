@@ -4,6 +4,11 @@
 describe('waterQualityTable component', function() {
 	// Load the module that contains the `waterQualityTable` component before each test
 	beforeEach(module('myApp'));  
+	beforeEach(module('waterQualityTable'));
+
+	beforeEach(function() {
+   		module('angularModule');
+	});
 
 	// Test suite for the dataservice
 	describe('dataservice', function(){
