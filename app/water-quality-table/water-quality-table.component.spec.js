@@ -6,10 +6,6 @@ describe('waterQualityTable component', function() {
 	beforeEach(module('myApp'));  
 	beforeEach(module('waterQualityTable'));
 
-	beforeEach(function() {
-   		module('angularModule');
-	});
-
 	// Test suite for the dataservice
 	describe('dataservice', function(){
 	});
@@ -73,7 +69,7 @@ describe('waterQualityTable component', function() {
 	});	
 
 	describe('dataservice', function(){
-		/*var sampleDataService,
+		var sampleDataService,
 			apiservice,
 			idservice,
 			$httpBackend;
@@ -87,19 +83,17 @@ describe('waterQualityTable component', function() {
 
 			 authRequestHandler = $httpBackend.when('GET',
 			 	"http://environment.data.gov.uk/doc/bathing-water-quality/stp-risk-prediction/bathing-water/ukk2305")
-                .respond({userId: 'userX'}, {'A-Token': 'xxx'});
+                .respond({userId: 'userX'}, {token: 'token'});
 		}));
 
 		describe('dataservice.getDailyForecast()', function(){
 
 			it('should get the correct forecast', function(){
-				
 				spyOn(apiservice, 'getRiskForecastApi').and.callThrough();
 				spyOn(idservice, 'getWaterId').and.callThrough();
 
-
-				console.log(sampleDataService.getDailyForecast().then());
+				console.log(sampleDataService.getDailyForecast());
 			});
-		});*/
+		});
 	});
 })

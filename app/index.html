@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <base href="/">
+
     <meta charset="utf-8">
     <title>Recreating features with AngularJS</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -8,21 +10,24 @@
     
     <!-- Angular components -->
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/angular-moment/angular-moment.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
 
-    <!-- My modules -->
+    <!-- App components -->
     <script src="myApp.module.js"></script>
+    <script src="myApp.dataservice.js"></script>
+    
+    <!--waterQualityTable components-->
     <script src="water-quality-table/water-quality-table.module.js"></script>
     <script src="water-quality-table/water-quality-table.component.js"></script>
-
-    <!-- My services -->
-    <script src="/water-quality-table/water-quality-table.dataservice.js"></script>
+     <script src="/water-quality-table/water-quality-table.dataservice.js"></script>
+    
+    <!--searchFeature components-->
+    <script src="search-feature/search-feature.module.js"></script>
+    <script src="search-feature/search-feature.component.js"></script>  
   </head>
-  
   <body>
     <div ng-app="myApp">
-      <water-quality-table></water-quality-table>
+      <div ng-view></div>
     </div>
   </body>
 </html>

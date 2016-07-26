@@ -2,7 +2,7 @@
 
 // Constructor for the table component
 angular
-	.module('myApp')
+	.module('waterQualityTable')
 	.component('waterQualityTable', {
 		templateUrl:'water-quality-table/water-quality-table.html',
 		controller:['$log',
@@ -80,7 +80,7 @@ angular
 						return vm.mostRecentSample
 					}, function onFailure(message){
 						$log.error("Failed at 'WaterQualityTable.getMostRecentSample()'");
-					})
+					});
 				}
 
 				function getCompliances(){
@@ -89,7 +89,7 @@ angular
 						return vm.compliances;
 					},function onFailure(message){
 						$log.error("Failed at 'WaterQualityTable.getCompliances()'");
-					})
+					});
 				}
 			}
 		]
