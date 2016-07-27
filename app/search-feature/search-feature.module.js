@@ -1,4 +1,5 @@
 'use strict';
 
 // Define the module for 'searchFeature'
-angular.module('searchFeature', []);
+angular
+	.module('searchFeature', []);

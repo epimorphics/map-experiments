@@ -2,6 +2,51 @@
 
 <div>
 	<div>
+		<h3>Select sites by name</h3>
+	</div>
+	<div>
+		<ul>
+			<li>
+				<input type="radio" name="selection-name-type" ng-model="$ctrl.filtering" value="all">
+				all name categories
+			</li>
+			<li>
+				<input type="radio" name="selection-name-type" ng-model="$ctrl.filtering" value="bathing water">
+				bathing water name
+			</li>
+			<li>
+				<input type="radio" name="selection-name-type" ng-model="$ctrl.filtering" value="district"> 
+				district or borough name
+			</li>
+			<li>
+				<input type="radio" name="selection-name-type" ng-model="$ctrl.filtering" value="county">
+				county name
+			</li>
+			<li>
+				<input type="radio" name="selection-name-type" ng-model="$ctrl.filtering" value="country">
+				country
+			</li>
+			<li>
+				<input type="radio" name="selection-name-type" ng-model="$ctrl.filtering" value="water company">
+				water company
+			</li>
+		</ul>
+	</div>
+	<div>
+		<input ng-model="$ctrl.query" placeholder="Search...">
+	</div>
+	<div>
+		<ul id="objects-list">
+			<li ng-repeat = "object in $ctrl.objects | filter: $ctrl.search | orderBy: $ctrl.orderProp"
+				ng-if     = "$ctrl.filtering == object.type || $ctrl.filtering == 'all'">
+				
+				<span>{{object.type}}</span>
+				<span>{{object.name}}</span>
+				<span ng-show="object.bws">{{object.bws}} <i>bathing waters</i></span>
+			</li>
+		</ul>
+	</div>
+	<div>
 		<a href="/table">go to 'water-quality-table'</a>
 	</div>
 </div>

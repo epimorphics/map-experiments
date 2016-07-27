@@ -29,7 +29,7 @@ angular
 	}])
 
 	// Service that retrieves data about bathing waters
-	.factory('dataservice',
+	.factory('table_dataservice',
 	   ['$http',
 	    '$log',
 		'idservice',
