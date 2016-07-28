@@ -12,12 +12,13 @@ angular
 			function WaterQualityTable($log, $q, table_dataservice){
 				var vm = this;
 			
-				vm.title               = 'Water quality';
-				vm.dailyForecast 	   = {};
-				vm.dailyForecastDate   = {};
-				vm.intervalStartDate   = {};
-				vm.intervalEndDate     = {};
-				vm.mostRecentSample    = {};
+				vm.title               	= 'Water quality';
+				vm.dailyForecast 	   	= {};
+				vm.dailyForecastDate   	= {};
+				vm.intervalStartDate   	= {};
+				vm.intervalEndDate     	= {};
+				vm.mostRecentSample    	= {};
+				vm.mostRecentSampleDiff = {};
 
 				vm.compliances = []; 
 
@@ -30,7 +31,8 @@ angular
 						getIntervalStartDate(),
 						getIntervalEndDate(),
 						getMostRecentSample(),
-						getCompliances()
+						getMostRecentSampleDiff(),
+						getCompliances(),
 					   ];
 
 					return $q.all(promises).then(function (){
@@ -77,9 +79,18 @@ angular
 				function getMostRecentSample(){
 					return table_dataservice.getMostRecentSample().then(function(data){
 						vm.mostRecentSample = data;
-						return vm.mostRecentSample
+						return vm.mostRecentSample;
 					}, function onFailure(message){
 						$log.error("Failed at 'WaterQualityTable.getMostRecentSample()'");
+					});
+				}
+
+				function getMostRecentSampleDiff(){
+					return table_dataservice.getMostRecentSampleDiff().then(function(data){
+						vm.mostRecentSampleDiff = data;
+						return vm.mostRecentSampleDiff;
+					}, function onFailure(message){
+						$log.error("Failed at 'WaterQualityTable.getMostRecentSampleDiff()'");
 					});
 				}
 

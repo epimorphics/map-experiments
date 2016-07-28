@@ -10,14 +10,25 @@ angular
 	// Service for  customizing the date format
 	.factory('timeservice', ['$q', function($q){
 		var service = {
-			getDaysDifference: getDaysDifference
+			getDifference: 		 getDifference,
+			getDate: getDate
 		}
 
 		return service;
 
+		function getDate(date){
+			var formatedDate = new Date(date);
+			var day = 1000 * 60 * 60 * 24;
+			var newDate;
+
+			newDate = Math.ceil(formatedDate.getTime());
+			console.log(newDate);
+			return newDate;
+		}
+
 		// Get the days difference between current date and
 		// the most recent sample date
-		function getDaysDifference(date){
+		function getDifference(date){
 			var formatedDate = new Date(date); 
 			var now  = new Date();
 			var day  = 1000 * 60 * 60 * 24; 
@@ -40,12 +51,13 @@ angular
 			
 			// Functionality provided by the service
 			var service = {
-				getDailyForecast:       getDailyForecast,
-				getDailyForecastDate:   getDailyForecastDate,
-				getIntervalStartDate:   getIntervalStartDate,
-				getIntervalEndDate:     getIntervalEndDate,
-				getMostRecentSample:    getMostRecentSample,
-				getCompliances: 		getCompliances
+				getDailyForecast:        getDailyForecast,
+				getDailyForecastDate:    getDailyForecastDate,
+				getIntervalStartDate:    getIntervalStartDate,
+				getIntervalEndDate:      getIntervalEndDate,
+				getMostRecentSample:     getMostRecentSample,
+				getMostRecentSampleDiff: getMostRecentSampleDiff,
+				getCompliances: 		 getCompliances
 			};
 
 			return service;
@@ -110,12 +122,25 @@ angular
 				return $http.get(API_CALL)
 				.then(function onSuccess(response){
 					var date  = response.data.result.items[0].sampleDateTime.inXSDDateTime._value;
-					return timeservice.getDaysDifference(date);
+					return timeservice.getDate(date);
 				}, function onFailure(response){
 					$log.error("Failed http request at 'dataservice.getMostRecentSample()':" + response);
 					return "Failed http request at 'dataservice.getMostRecentSample()'";
-				});
-		
+				});	
+			}
+
+			function getMostRecentSampleDiff(){
+				var waterId  = idservice.getWaterId();
+				var API_CALL = apiservice.getBWInSeasonApi(waterId);
+				
+				return $http.get(API_CALL)
+				.then(function onSuccess(response){
+					var date  = response.data.result.items[0].sampleDateTime.inXSDDateTime._value;
+					return timeservice.getDifference(date);
+				}, function onFailure(response){
+					$log.error("Failed http request at 'dataservice.getMostRecentSample()':" + response);
+					return "Failed http request at 'dataservice.getMostRecentSample()'";
+				});	
 			}
 
 			function getCompliances(){
