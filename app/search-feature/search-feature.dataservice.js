@@ -3,9 +3,12 @@
 angular
 	.module('searchFeature')
 
-	.factory('search_dataservice', ['$q',
+	.factory('search_dataservice', 
+		['$q',
+		 'apiservice',
+		 'requestservice',
 
-		function($q){
+		function($q, apiservice, requestservice){
 			
 			var service = {
 				getObjects: getObjects,
@@ -13,45 +16,28 @@ angular
 
 			return service;
 
+			//Function to get all search objects
 			function getObjects(){
-				var deferred = $q.defer();
-				deferred.resolve([
-					{
-						type: 'county',
-						name: 'Bvon',
-						bws:  '2'
-					},
+				var API_CALL = apiservice.getBathingWatersApi();
+				var objects = [];
+				
+				return requestservice.requestBathingWaters(API_CALL).then(function onSuccess(bwArray){
+					for (var index = 0; index < bwArray.length; index++){
+						
+						addBahingWater();
 
-					{
-						type: 'county',
-						name: 'Avon',
-						bws:  '5'
-					},
+						function addBahingWater(){
+							var object = {};
 
-					{
-						type: 'bathing water',
-						name: 'Spittal',
-					},
+							object.type = 'bathing water';
+							object.name = bwArray[index].name._value;
 
-					{
-						type:'water company',
-						name:'A Company',
-						bws: '50'
-					},
-
-					{
-						type: 'district',
-						name: 'Test District',
-						bws: '21'
-					},
-
-					{
-						type: 'country',
-						name: 'England',
-						bws: '415',
+							objects.push(object);
+						}
 					}
-				]);
-				return deferred.promise;
+					console.log(objects);
+					return objects;
+				});
 			}
 		}
 	]);

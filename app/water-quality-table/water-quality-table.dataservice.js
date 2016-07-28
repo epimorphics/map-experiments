@@ -16,18 +16,18 @@ angular
 
 		return service;
 
+		//Get the correct date format
 		function getDate(date){
 			var formatedDate = new Date(date);
-			var day = 1000 * 60 * 60 * 24;
 			var newDate;
 
-			newDate = Math.ceil(formatedDate.getTime());
-			console.log(newDate);
+			newDate = formatedDate.getTime();
+			
 			return newDate;
 		}
 
-		// Get the days difference between current date and
-		// the most recent sample date
+		// Get the days difference between current date
+		// and the most recent sample date in days
 		function getDifference(date){
 			var formatedDate = new Date(date); 
 			var now  = new Date();

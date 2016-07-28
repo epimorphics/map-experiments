@@ -35,7 +35,7 @@
 	<div>
 		<input ng-model="$ctrl.query" placeholder="Search...">
 	</div>
-	<div>
+	<div style="height: 600px; width:50%; overflow-y: auto;">
 		<ul id="objects-list">
 			<li ng-repeat = "object in $ctrl.objects | filter: $ctrl.search | orderBy: $ctrl.orderProp"
 				ng-if     = "$ctrl.filtering == object.type || $ctrl.filtering == 'all'">

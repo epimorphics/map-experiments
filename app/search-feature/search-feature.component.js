@@ -33,12 +33,13 @@ angular
 					});
 				}
 
+				// Get the searchable content
 				function getObjects(){
 					return search_dataservice.getObjects().then(function(data){
 						vm.objects = data;
 						return vm.objects;
-					}, function onFailurie(){
-						$log.error("Failed at SearchFeature.getObjects()");
+					}, function onFailure(message){
+						$log.error("Failed at 'SearchFeature.getObjects()'")
 					});
 				}
 
