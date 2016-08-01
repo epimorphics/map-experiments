@@ -58,5 +58,50 @@ describe('component: searchFeature', function() {
 				expect(ctrl.search(item)).toBe(true);
 			});
 		});
-	});	
+	});
+
+	/*//Test suite for search_dataservice
+	describe('search_dataservice', function(){
+		var search_dataservice;
+		var	$q;
+	 	var	requestBathingWatersDeferred;
+	 	var	mockedRequestService = function(){
+			return {
+				requestBathingWaters: jasmine.createSpy()
+			}
+		};
+
+		beforeEach(function(){
+			module(function($provide){
+		    	$provide.service('requestservice', mockedRequestService);
+		    });
+
+		    inject(function(_search_dataservice_, _$q_){
+		      search_dataservice = _search_dataservice_;
+		      $q = _$q_;
+		    });
+		})
+
+		describe('getObjects()', function(){
+			it('should call requestservice.requestBathingWaters()', function(){
+				var dummyData = ['bw1', 'bw2'];
+				expectRequestBathingWaters();
+				
+				search_dataservice.getObjects();
+				flushRequestBathingWaters();
+
+				expect(mockedRequestService.requestBathingWaters()).toHaveBeenCalled();
+			});
+		});
+
+		function expectRequestBathingWaters() {
+			requestBathingWatersDeferred = $q.defer();
+			console.log(mockedRequestService.requestBathingWaters);
+			mockedRequestService.requestBathingWaters.and.returnValue(requestBathingWatersDeferred.promise);
+		}
+
+		function flushRequestBathingWaters(data) {
+			requestBathingWatersDeferred.resolve(data);
+		}
+	});*/	
 });

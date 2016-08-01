@@ -35,14 +35,14 @@
 	<div>
 		<input ng-model="$ctrl.query" placeholder="Search...">
 	</div>
-	<div style="height: 600px; width:50%; overflow-y: auto;">
+	<div style="height: 600px; width:500px; overflow-y: auto;">
 		<ul id="objects-list">
-			<li ng-repeat = "object in $ctrl.objects | filter: $ctrl.search | orderBy: $ctrl.orderProp"
-				ng-if     = "$ctrl.filtering == object.type || $ctrl.filtering == 'all'">
+			<li ng-repeat = "item in $ctrl.searchArray | filter: $ctrl.search | orderBy: $ctrl.orderProp"
+				ng-if     = "$ctrl.filtering == item.type || $ctrl.filtering == 'all'">
 				
-				<span>{{object.type}}</span>
-				<span>{{object.name}}</span>
-				<span ng-show="object.bws">{{object.bws}} <i>bathing waters</i></span>
+				<span>{{item.type}}</span>
+				<span>{{item.name}}</span>
+				<span ng-show="item.bws">{{item.bws}} <i>bathing waters</i></span>
 			</li>
 		</ul>
 	</div>

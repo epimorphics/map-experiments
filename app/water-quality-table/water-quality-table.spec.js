@@ -76,7 +76,7 @@ describe('component: waterQualityTable', function() {
 			$httpBackend;
 
 		beforeEach(inject(function($injector){
-			sampleDataService = $injector.get('dataservice');
+			sampleDataService = $injector.get('table_dataservice');
 			$httpBackend      = $injector.get('$httpBackend');
 
 			apiservice        = $injector.get('apiservice');

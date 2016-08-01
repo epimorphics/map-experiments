@@ -27,7 +27,7 @@ angular
 	}])
 
 	// Service to build the URIs for the API calls
-	.factory('apiservice', ['$q', function($q){
+	.factory('apiservice', [ function($q){
 
 		var service = {
 			getRiskForecastApi:     getRiskForecastApi,
@@ -68,12 +68,12 @@ angular
 		}
 
 		function getBathingWatersApi(){
-			return BATHING_WATERS_API_CALL + "?_pageSize=1000";
+			return BATHING_WATERS_API_CALL + "?_pageSize=1000" + "&" + "_properties=latestProfile.countyName";
 		}
 	}])
 
 	// Service that returns the bw id
-	.factory('idservice', ['$q', function($q){
+	.factory('idservice', [ function($q){
 
 	    	var service = {
 	    		getWaterId: getWaterId

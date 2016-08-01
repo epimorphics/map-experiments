@@ -18,13 +18,13 @@ angular
 				vm.orderProp = "name";
 				
 				//Get from dataservice
-				vm.objects   = [];
+				vm.searchArray   = [];
 
-				activate()
+				activate();
 
 				function activate(){
 					var promises = 
-					   [getObjects()
+					   [getSearchArray()
 					   
 					   ];
 
@@ -34,10 +34,10 @@ angular
 				}
 
 				// Get the searchable content
-				function getObjects(){
-					return search_dataservice.getObjects().then(function(data){
-						vm.objects = data;
-						return vm.objects;
+				function getSearchArray(){
+					return search_dataservice.retrieveSearchArray().then(function(data){
+						vm.searchArray = data;
+						return vm.searchArray;
 					}, function onFailure(message){
 						$log.error("Failed at 'SearchFeature.getObjects()'")
 					});
