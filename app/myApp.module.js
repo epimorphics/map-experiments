@@ -1,23 +1,5 @@
 'use strict';
 
-// Define the module for 'myApp'
+// Declare app level module which depends on views, and components
 angular
-	.module('myApp', 
-		[
-			'ngRoute',
-			'waterQualityTable',
-			'searchFeature'
-		])
-
-	.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-	  $locationProvider.html5Mode(true);
-
-	  $routeProvider.
-        when('/table', {
-          template: '<water-quality-table></water-quality-table>'
-        }).
-        when('/search-feature', {
-          template: '<search-feature></search-feature>'
-        }).
-        otherwise('/table');
-	}]);
+	.module('myApp', ['ui-leaflet']);

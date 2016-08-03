@@ -1,22 +1,42 @@
 'use strict';
 
-// Angular E2E Testing Guide:
-// https://docs.angularjs.org/guide/e2e-testing
+/* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('My app', function() {
+describe('my app', function() {
 
-	beforeEach(function() {
-	browser.get('index.html');
-	}); 
-	
-	it('should modify `filtering` value in model by radio button check', function(){
-		/*//var radioButtons = element.all(by.name('selection-name-type'));
-		//var filtering = element(by.model('$ctrl.filtering'));
 
-		input('filtering').select('all');
-		//expect(element('input[name="selection-name-type"]:checked').val()).toBe('all');
-		element(by.id('radiogrp1')).all(by.tagName('md-radio-button')).get(0).click();
-		element(by.css('input[name="selection-name-type"]:checked')).getAttribute('value').toBe('all');
-	//	radioButtons.get(0).click();*/
-	});
+  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
+    browser.get('index.html');
+    expect(browser.getLocationAbsUrl()).toMatch("/view1");
+  });
+
+
+  describe('view1', function() {
+
+    beforeEach(function() {
+      browser.get('index.html#!/view1');
+    });
+
+
+    it('should render view1 when user navigates to /view1', function() {
+      expect(element.all(by.css('[ng-view] p')).first().getText()).
+        toMatch(/partial for view 1/);
+    });
+
+  });
+
+
+  describe('view2', function() {
+
+    beforeEach(function() {
+      browser.get('index.html#!/view2');
+    });
+
+
+    it('should render view2 when user navigates to /view2', function() {
+      expect(element.all(by.css('[ng-view] p')).first().getText()).
+        toMatch(/partial for view 2/);
+    });
+
+  });
 });
