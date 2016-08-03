@@ -1,8 +1,5 @@
 'use strict';
 
-// Define the module for 'myApp'
+// Declare app level module which depends on views, and components
 angular
-	.module('myApp', [
-		//...which depends on the modules:
-		'waterQualityTable',
-	])
+	.module('myApp', ['ui-leaflet']);
