@@ -1,0 +1,30 @@
+  { "type": "FeatureCollection",
+    "features": [
+      { "type": "Feature",
+        "geometry": {"type": "Point", "coordinates": [364501.2, 671098.3]},
+        "crs": {
+          "type": "name",
+          "properties": {
+            "name": "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs",
+            "type": "proj4"
+          } 
+        }
+      },
+      { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [36.2, 67.3], [36.6, 67.3], [36.6, 67.5],
+               [36, 67.2], [36.2, 67.3] ]
+             ]
+         },
+         "crs": {
+          "type": "name",
+          "properties": {
+            "name": "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs",
+            "type": "proj4"
+          } 
+        }
+         }
+       ]
+     }
