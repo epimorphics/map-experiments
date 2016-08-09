@@ -4,35 +4,37 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>My AngularJS App</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
   <link rel="stylesheet" href="app.css">
+  
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
   <!--Angular components-->
   <script src="bower_components/angular/angular.js"></script>
 
-  <script src="bower_components/leaflet/dist/leaflet.js"></script>
+  <!--ui-leaflet directive-->
   <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+  <script src="bower_components/leaflet/dist/leaflet.js"></script>
   <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
   <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
 
-  <script src="bower_components/proj4/dist/proj4.js"></script>
-  <script src="bower_components/proj4/dist/proj4-src.js"></script>
+  <!--proj4js-->
+  <script src="bower_components/proj4/dist/proj4.js"></script>  
+
 </head>
 <body>
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <my-app></my-app>
+ <my-app></my-app>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -42,5 +44,6 @@
   <script src="myApp.module.js"></script>
   <script src="myApp.component.js"></script>
   <script src="myApp.dataservice.js"></script>
+
 </body>
 </html>
