@@ -45,57 +45,49 @@ angular
 			/* Functions implementation */
 
 			function getZoiGeoJson(){
+				// Get api call to bw zone of influence
 				var API_CALL = apiservice.getZoneOfInfluence();
-				
-				proj4.defs("EPSG:27700","+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs");
-				//proj4.defs("EPSG:4326","+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees");
 
+				// Make the api request
 				return $http.get(API_CALL).then(function onSuccess(response){
+					// Get the zone of influence as gml
 					var gml = response.data.result.items[0].zoneOfInfluence.extent.asGML;
-	
+		
+					// Remove crs from the string
 					gml = gml.replace('srsName="os:BNG"', '');
 				   	
-				   	//Start wrapping
+				   	// Wrap gml in a feature collection
 				   	var newGml = wrap(gml);
-				   	//End wrapping
 
-				   	
-				   	//create the gml object
-				 	//var gmlOptions = {
-					//     featureType: "feature",
-					//     featureNS:   "http://example.com/feature"
-					// };
-					
-					var osbgProjection = new ol.proj.Projection({code: "EPSG:27700"});
+					// Define zone of influence crs and
+					// crs used by leaflet with the ol
+					// constructor
+					var osgbProjection = new ol.proj.Projection({code: "EPSG:27700"});
 					var wsgProjection  = new ol.proj.Projection({code: "EPSG:4326"});
 
 					
-					//get gml format and read in features from gml string
+					// Get ol gml format and use it to read in a gml string
+					// as a gml object
 					var gmlFormat 	 = new ol.format.GML();
-				   	var gmlFeatures = gmlFormat.readFeatures(newGml)//, projection);
+				   	var gmlFeatures = gmlFormat.readFeatures(newGml);
 
-				   	//get geojson format and write feature in geojson string
-				   	var formatOptions = {
-				   		defaultDataProjection: osbgProjection,
+				   	// Parameters object for ol GeoJSON format
+				   	var geojsonFormatOptions = {
+				   		defaultDataProjection: osgbProjection,
 				   		geometryName: "Polygon"
 				   	}
 
+				   	// Parameters object for ol writeFeaturesObject
 				   	var featuresOptions = {
-				   		featureProjection: osbgProjection,
+				   		featureProjection: osgbProjection,
 				   		dataProjection: wsgProjection
 				   	}
 
-				   	var geojsonFormat = new ol.format.GeoJSON(formatOptions);
-				   	var geojsonFeatures = geojsonFormat.writeFeaturesObject(gmlFeatures, featuresOptions);//osbgProjection, wsgProjection);
-				   	//
-				   	
-				   	//console.log(geojsonFeaturesOsgb);
-				   	//console.log(ol.proj.transform(geojsonFeatures.features[0].geometry, osbgProjection, wsgProjection));
-				   	//gmlFeatures.setGeometry("Polygon");
-				   	//console.log(gmlFeatures.getGeometry());
-				   	 console.log(geojsonFeatures);
+				   	// Get GeoJSON format and convert the gml object
+				   	// to GeoJSON object
+				   	var geojsonFormat = new ol.format.GeoJSON(geojsonFormatOptions);
+				   	var geojsonFeatures = geojsonFormat.writeFeaturesObject(gmlFeatures, featuresOptions);
 
-					
 					return geojsonFeatures;
 				})
 			}
@@ -122,7 +114,6 @@ angular
 										openFeature            	   +
 											openGeometryFeature    + 
 												gml                +
-										//		foo 			   +
 											closeGeometryFeature   +
 							 			closeFeature               + 
 							 		closeFeatureMember             +
