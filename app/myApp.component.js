@@ -7,6 +7,7 @@ angular
 		templateUrl:'myApp.html',
 		controller:
 		   ['$scope',
+<<<<<<< HEAD
 		   	'$http',
 		   	'$log',
 		   	'dataservice',
@@ -83,6 +84,21 @@ angular
 						$log.error("Failed at `MyApp.getZoiGeoJson()` " + message);
 					})
 				}
+=======
+
+			function MyApp($scope){
+				angular.extend($scope, {
+	                uk: {
+	                    lat: 55.505,
+	                    lng: -4,
+	                    zoom:5
+	                },
+
+	                defaults: {
+	                    scrollWheelZoom: true
+                	},
+	            })
+>>>>>>> c268fc1cae8f8d06b9a8e75a4e38d2ff814c73b9
 			}
 		]
 	});
